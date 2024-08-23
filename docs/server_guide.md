@@ -44,11 +44,22 @@ ssh <username>@<IP>
 ## SSH公钥认证
 
 一般情况下每次登录都需要google authenticator。如果在本地终端生成密钥并上传至服务器，则可以省略这个步骤。
+如果是linux系统,可以用命令`ssh-copy-id`:
 
 ```bash
 ssh-keygen -t rsa # 出现交互框按回车即可
 ssh-copy-id <username>@<IP>
 ```
+如果是windows系统,首先打开程序powershell,然后用后续的命令:
+
+```powershell
+ssh-keygen -t rsa # 出现交互框按回车即可
+cat .ssh/id_rsa.pub # 将公钥输出到屏幕上,用鼠标选择并复制
+ssh username@ecwang.top # 登录服务器
+echo 粘贴的公钥 >> ~/.ssh/authorized_keys
+```
+
+
 
 >这个过程实际上是把本机上生成的公钥`.../.ssh/id_rsa.pub`复制粘贴到服务器上`~/.ssh/authorized_keys`文件中，从而实现密钥验证。在一些SSH客户端中也能通过图形化界面完成这一过程。
 
@@ -216,3 +227,41 @@ ssh node01 # 连接计算节点1，同理还可以连2, 3, 4
 ```
 
 计算节点只能在管理节点的内网访问，因此不能一步连接到计算节点。
+
+# 在计算节点上使用jupyter
+
+在管理节点上输入命令:
+
+```bash
+jupyter-node
+```
+
+会输出如下的提示:
+
+```bash
+input the node to start a jupyter server(1/2/3/4):1 # 这里首先你需要输入1/2/3/4来确定要在哪一个计算节点跑程序
+
+# 下面输出的内容是提示
+============== login to the specified node ===============
+ssh node01
+============== run jupyter lab on the node ===============
+nohup jupyter lab --ip=192.168.1.1 --port=9802 &
+==========================================================
+ssh -N -L localhost:9802:192.168.1.1:9802 hryu@211.86.148.33
+===copy the command above and run in the local terminal===
+==========================================================
+======== Open jupyterlab on http://localhost:9802 ========
+```
+
+按照提示一步一步输入命令, 你会首先登入计算节点node01, 然后在node01上后台运行jupyter lab；然后在自己电脑的
+终端里输入一条命令从而把计算节点的端口安全地映射到本机的localhost. 
+
+> 这里的port是根据用户的uid分配的,应该不会出现自己的端口被别人占用的情况. 
+
+
+
+
+
+
+
+作者:于浩然 最后修改时间:2024.08.23
