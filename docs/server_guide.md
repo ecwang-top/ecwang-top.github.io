@@ -211,12 +211,14 @@ conda install ipykernel # 再安装ipykernel包
 接下来保证你在这个虚拟环境中，运行下面的命令
 
 ```bash
-python -m ipykernel install --name fitting --display-name "Fitting_env"
+python -m ipykernel install --user --name fitting --display-name "Fitting_env"
 ```
 
 这里`--name`后面跟虚拟环境的名字，`display-name`后面跟你想让他在图形界面显示的名字。
 
 接下来就可以在运行你的jupyter kernel时选择这个虚拟环境了。
+
+> !注意!:`--user`参数是必须加的, 否则会提示权限不够无法安装内核.
 
 # 连接计算节点
 
@@ -264,4 +266,4 @@ ssh -N -L localhost:9802:192.168.1.1:9802 hryu@211.86.148.33
 
 
 
-作者:于浩然 最后修改时间:2024.08.23
+作者:于浩然 最后修改时间:2024.08.26
