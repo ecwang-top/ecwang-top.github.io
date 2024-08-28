@@ -44,7 +44,7 @@ ssh <username>@<IP>
 ## SSH公钥认证
 
 一般情况下每次登录都需要google authenticator。如果在本地终端生成密钥并上传至服务器，则可以省略这个步骤。
-如果是linux系统,可以用命令`ssh-copy-id`:
+如果是UNIX(linux/macos)系统,可以用命令`ssh-copy-id`:
 
 ```bash
 ssh-keygen -t rsa # 出现交互框按回车即可
@@ -266,4 +266,4 @@ ssh -N -L localhost:9802:192.168.1.1:9802 hryu@211.86.148.33
 
 
 
-作者:于浩然 最后修改时间:2024.08.26
+作者:于浩然 最后修改时间:2024.08.28
