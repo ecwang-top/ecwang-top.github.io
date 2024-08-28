@@ -16,6 +16,7 @@
     * [Fortran/IDL中的格式化输出](format_code.md)
     * [Python列表生成式](python_gen.md)
     * [Vim中的正则表达式](regex_vim.md)
+    * [文献管理软件Zotero](zotero.md)
 
 * **Meeting Record**
 
