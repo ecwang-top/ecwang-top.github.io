@@ -164,6 +164,8 @@ conda remove -n fitting
 
 现在推荐优先使用Jupyter Lab。使用如下命令进行配置
 
+>现在更推荐使用在计算节点上运行jupyter, 详见"在计算节点上使用jupyter"
+
 ```bash
 jupyter server --generate-config # 在~/.jupyter/下生成配置文件
 jupyter server password # 设置密码
@@ -228,6 +230,14 @@ ssh node01 # 连接计算节点1，同理还可以连2, 3, 4
 ```
 
 计算节点只能在管理节点的内网访问，因此不能一步连接到计算节点。
+
+> 一般从管理节点连接计算节点是不需要输入密码的. 如果提示需要密码, 有可能是`~/.ssh/authorized_keys`遭到了修改, 可以进行如下操作:
+
+```bash
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+```
+
+这样就把`id_rsa.pub`中的公钥粘贴到了`authorized_keys`文件中, 应该就能解决问题了.
 
 # 查看计算节点的资源使用情况
 
